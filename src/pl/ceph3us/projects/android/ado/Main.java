@@ -15,13 +15,13 @@ public class Main {
             }
             java.time.LocalDate now = java.time.LocalDate.now();
             java.security.MessageDigest crypt = java.security.MessageDigest.getInstance("SHA-1");
+            crypt.reset();
             crypt.update(String.format(
                     "%1$s:%2$s:%3$s",
                     now.getYear(),
                     now.getMonthValue() - 1,
                     now.getDayOfMonth())
                     .getBytes("utf8"));
-            crypt.reset();
             String overrideValue = new java.math.BigInteger(1, crypt.digest()).toString(16);
             System.out.println("ANDROID_DAILY_OVERRIDE is: "+overrideValue);
             if(print) {
